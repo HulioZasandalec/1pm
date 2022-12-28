@@ -5,52 +5,45 @@
 
 
 #include <iostream>
-using std::cout;
-using std::cin;
-using std::endl;
-#include <string>
-
+using namespace std;
 int main() {
-    int row, col;
-    int current_number; // Ïåðåìåííàÿ äëÿ çàïîëíåíèÿ ìàòðèöû.
-    int min_sum = INT_MAX;// Ïåðåìåííûå äëÿ òîãî, ÷òîáû íàéòè ìèíèìàëüíóþ ñóììó ýëåìåíòîâ ñòðîêè:
-    int current_sum = 0;
-    int current_i = -1;
+    setlocale(LC_ALL, "Russian");
+    int q; // Переменная для заполнения матрицы.
+    int min_sum = INT_MAX;// Очени большое число для нахождения минимальной суммы
+    int sum = 0;
+    int current_i;
 
-    cout << "Enter a number of rows: " << endl;
-    cin >> row; // Ïîëüçîâàòåëü ââîäèò êîëè÷åñòâî ñòðîê
-    cout << "Enter a number of columns: " << endl;
-    cin >> col; // Ïîëüçîâàòåëü ââîäèò êîëè÷åñòâî ñòîëáöîâ
+    
 
-    int arr[row][col]; // Ñîçäà¸ì ìàòðèöó ïîëüçîâàòåëüñêîãî ðàçìåðà
-
-    for (int i = 0; i < row; i++) { // Çàïîëíÿåì ìàòðèöó
-        for (int j = 0; j < col; j++) {
-            cout << "Enter the value: " << endl;
-            cin >> current_number;
-            arr[i][j] = current_number;
+    int arr[2][2]; // 
+    for (int i = 0; i < 2; i++) { // Задаем пользовательскую матрицу
+        for (int j = 0; j < 2; j++) {
+            cout << "Ведите значение " << endl;
+            cin >> q;
+            arr[i][j] = q;
         }
     }
-    for (int i = 0; i < row; i++) { // Íàõîäèì ìèíèìàëüíóþ ñóììó ýëåìåíòîâ ñòðîêè.
-        for (int j = 0; j < col; j++) {
-            current_sum += arr[i][j];
+    for (int i = 0; i < 2; i++) { // Находим минимальную сумму элементов строки.
+        for (int j = 0; j < 2; j++) {
+            sum += arr[i][j];
         }
-        if (current_sum < min_sum) {
-            min_sum = current_sum;
-            current_i = i; // À òàê æå çàïîìèíàåì íîìåð ñàìîé ñòðîêè, â êîòîðîé ñóììà ýëåìåíòîâ ñàìàÿ ìàëåíüêàÿ.
+        if (sum < min_sum) {
+            min_sum = sum;
+            current_i = i; // А так же запоминаем номер самой строки, в которой сумма элементов самая маленькая.
         }
-        current_sum = 0;
+        
     }
 
-    for (int j = 0; j < col; j++) { // Ìåíÿåì âñå çíà÷åíèÿ íàéäåííîé ñòðîêè íà ñóììó å¸ ýëåìåíòîâ.
+    for (int j = 0; j <2; j++) { // Меняем все значения найденной строки на сумму её элементов.
         arr[current_i][j] = min_sum;
     }
 
 
-    for (int i = 0; i < row; i++) { // Âûâîäèì ìàòðèöó â êîíñîëü
-        for (int j = 0; j < col; j++) {
+    for (int i = 0; i < 2; i++) { // Выводим матрицу в консоль
+        for (int j = 0; j < 2; j++) {
             cout << arr[i][j] << " ";
-            if (j == (col - 1)) {
+
+            if (j == (2 - 1)) {
                 cout << '\n';
             }
 
@@ -60,4 +53,3 @@ int main() {
 
 
 }
-
