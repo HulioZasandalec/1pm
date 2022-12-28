@@ -1,14 +1,71 @@
-﻿"4.1 Proga.exe" (Win32). Загружено "C:\Users\user\source\repos\4.1 Proga\Debug\4.1 Proga.exe". Символы загружены.
-"4.1 Proga.exe" (Win32). Загружено "C:\Windows\SysWOW64\ntdll.dll". 
-"4.1 Proga.exe" (Win32). Загружено "C:\Windows\SysWOW64\kernel32.dll". 
-"4.1 Proga.exe" (Win32). Загружено "C:\Windows\SysWOW64\KernelBase.dll". 
-"4.1 Proga.exe" (Win32). Загружено "C:\Windows\SysWOW64\msvcp140d.dll". 
-"4.1 Proga.exe" (Win32). Загружено "C:\Windows\SysWOW64\vcruntime140d.dll". 
-"4.1 Proga.exe" (Win32). Загружено "C:\Windows\SysWOW64\ucrtbased.dll". 
-Поток 0x1fec завершился с кодом 0 (0x0).
-"4.1 Proga.exe" (Win32). Загружено "C:\Windows\SysWOW64\kernel.appcore.dll". 
-"4.1 Proga.exe" (Win32). Загружено "C:\Windows\SysWOW64\msvcrt.dll". 
-"4.1 Proga.exe" (Win32). Загружено "C:\Windows\SysWOW64\rpcrt4.dll". 
-Поток 0x3b0c завершился с кодом 0 (0x0).
-Поток 0x3474 завершился с кодом 0 (0x0).
-Программа "[5744] 4.1 Proga.exe" завершилась с кодом 0 (0x0).
+/*Дана последовательность на* Лабораторная номер 4. Вариант 4. Пункт 1. Вербицкий Владислав
+ *
+ * 1.	Дана последовательность натуральных чисел {aj}j=1...n (n<=10000).
+ * Если в последовательности нет ни одного простого числа,
+ * упорядочить последовательность по невозрастанию. */
+
+
+#include <iostream>
+
+using namespace std;
+
+bool is_Prime(int n) { // Функция, чтобы узнать, простое ли число.
+
+    int d = 2;
+    while (d * d <= n) {
+        if (n % d == 0) {
+            return false;
+        }
+        d++;
+    }
+    return true;
+}
+void Sort(int arr[], int n) { // Функция сортировки по невозрастанию.
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++)
+        {
+            if (arr[j] < arr[j + 1])
+            {
+
+                swap(arr[j], arr[j + 1]);
+               
+            }
+        }
+    }
+}
+
+int main() {
+    setlocale(LC_ALL, "Russian"); //подключим русский язык
+    int n; // Установим пользовательскую длину массива
+    int x; // Переменная для заполнения динамического масства пользовательской длинны n
+    cout << "Введите длину массива ";
+    cin >> n;
+    cout << '\n';
+    int *arr= new int[n];
+    for (int i = 0; i < n; i++) { // Заполняю массив пользовательскими значениями.
+        cout << "Введите значения " << endl;
+        cin >> x;
+        arr[i] = x;
+        cout << '\n';
+    }
+
+    bool simple = true; // По умолчанию  устанвоим что простых чисел нет
+
+    for (int i = 0; i < n; i++) { // Пробегаемся по массиву.
+
+        if (is_Prime(arr[i])) {
+           simple = false; // При нахождении хотя бы одного простого числа устанавливаем false
+        }
+        if  (simple == true) {//Если условия выполнены и нет ни одного простого числа выводим отсортированные числа
+
+            Sort(arr, n);
+        }
+    }
+    for (int k = 0; k < n; k++) { // При условии true он отсортируется а при false то останется таким какой был введен пользователем
+        cout << arr[k] << " ";
+    }
+}
+
+
+
+
